@@ -24,8 +24,16 @@ modules:
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
     install:
-      # - micro
-      # - starship
+       - gnome-shell-extension-pop-shell.noarch # Tiling, floating - both.
+       - system76-scheduler # A better scheduler.
+       - docker # Until DDEV and Lando fully support podman
+       - docker-compose
+       - libvirt
+       - libvirt-client
+       - libvirt-nss
+       - virt-manager
+       - gnome-boxes
+       - distrobox # Better than toolbox.
     remove:
       - firefox # default firefox removed in favor of flatpak
       - firefox-langpacks # langpacks needs to also be removed to prevent dependency problems
@@ -38,11 +46,12 @@ modules:
       repo-name: flathub
       # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
-      # - org.gnome.Loupe
-      # - one.ablaze.floorp//lightning # This is an example of flatpak which has multiple branches in selection (flatpak//branch).
-      # Flatpak runtimes are not supported (like org.winehq.Wine//stable-23.08).
-      # Only normal flatpak applications are (like Floorp Lightning web browser in this example).
-      # Multiple install of same flatpaks with different branches is not supported.
+        - com.google.Chrome
+        - org.mozilla.firefox
+        - org.gnome.Epiphany
+        - com.github.Eloston.UngoogledChromium # Because google is evil
+        - org.onlyoffice.desktopeditors # Still need an office suite.
+        - org.gnome.Geary
       remove:
       # - org.gnome.eog
       #
@@ -56,3 +65,10 @@ modules:
     scripts:
       # this sets up the proper policy & signing files for signed images to work
       - signing.sh
+
+  - type: bling # configure what to pull in from ublue-os/bling
+    install:
+         - ublue-update # https://github.com/ublue-os/ublue-update
+         - dconf-update-service # a service unit that updates the dconf db on boot
+         - gnome-vrr # enables gnome-vrr for your image
+         - laptop # installs TLP and configures your system for laptop usage
