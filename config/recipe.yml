@@ -1,5 +1,5 @@
 # image will be published to ghcr.io/<user>/<name>
-name: startingpoint
+name: chilternos
 # description will be included in the image's metadata
 description: A starting point for further customization of uBlue images. Make your own! https://ublue.it/making-your-own/
 
@@ -24,6 +24,7 @@ modules:
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
       - https://copr.fedorainfracloud.org/coprs/kylegospo/system76-scheduler/repo/fedora-%OS_VERSION%/kylegospo-system76-scheduler-fedora-%OS_VERSION%.repo
+      - https://copr.fedorainfracloud.org/coprs/kylegospo/prompt/repo/fedora-%OS_VERSION%/kylegospo-prompt-fedora-%OS_VERSION%.repo 
     install:
        - gnome-shell-extension-pop-shell.noarch # Tiling, floating - both.
        - system76-scheduler # A better scheduler.
@@ -33,7 +34,11 @@ modules:
        - libvirt-nss
        - virt-manager
        - gnome-boxes
-       - distrobox # Better than toolbox.
+       - distrobox # More than toolbox.
+       - prompt
+       - powertop
+       #- psensor
+       #- lm-sensor
     remove:
       - firefox # default firefox removed in favor of flatpak
       - firefox-langpacks # langpacks needs to also be removed to prevent dependency problems
@@ -65,10 +70,11 @@ modules:
     scripts:
       # this sets up the proper policy & signing files for signed images to work
       - signing.sh
+      #- add docker and libvirt groups, make defaults
+      #- gnome extension installer (app indicators, dash to dock)
+
 
   - type: bling # configure what to pull in from ublue-os/bling
     install:
          - ublue-update # https://github.com/ublue-os/ublue-update
          - dconf-update-service # a service unit that updates the dconf db on boot
-         # - gnome-vrr # enables gnome-vrr for your image
-         - laptop # installs TLP and configures your system for laptop usage
